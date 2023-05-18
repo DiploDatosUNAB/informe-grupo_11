@@ -1,6 +1,6 @@
 ---
-title: "titulo"
-author: "nombres"
+title: "VINOS"
+author: "Silvina Pichetto / Florencia Vuono"
 output: html_document
 ---
 
@@ -8,29 +8,82 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 # Cargar los paquetes necesarios acá
+library(readr)
+library(dplyr)
 ```
 
 
 ## Introducción
 
-
+El presente informe presenta un ranking de vinos puntuados según la Revista Wine Esthusiast que cuenta con un equipo de revisores de cata
+más de 24 000 vinos de todo el mundo cada año, desde Francia e Italia hasta California, Australia, Sudáfrica, Argentina y más. Cuenta con acceso
+gratuito a la base de datos de calificaciones de vinos, cervezas y licores se puede filtrar por puntuación, precio, cosecha, variedad de uva y
+región, lo que lo convierte en una herramienta fácil y flexible para encontrar su bebida favorita.
 
 ## Exploración de los datos
+
+La base contiene 129.961 vinos puntuados, según país, precio, región, variedad, vina y contiene una pequeña reseña de cada uno.
 
 
 ```{r}
 # Código para cargar o leer los datos
+vinos <- read_csv("datos/vinos.csv")
+
 ```
 
-
+Promedio de precios de vinos
 
 ```{r}
-# Cödigo de R acá 
-# Agregá más bloques según sea necesario
+vinos %>%
+ group_by(precio) %>%
+ summarise(precio_promedio = mean(precio, na.rm = TRUE))
+```
+Vinos más caros, cuyo valor es superior a 400
+
+```{r}
+filter(vinos, precio >=400)
 ```
 
+Vinos baratos, cuyo un valor es inferior a 20
+```{r}
+filter(vinos, precio <=20)
+```
+
+Vinos mejor puntuados, cuya puntuación es superior a 100
+
+```{r}
+filter(vinos, puntos>=100 )
+
+```
+
+Mejores vinos puntuados de Argentina
+
+```{r}
+subset(vinos, pais == "Argentina" & puntos >= 95)
+
+```
+
+Paise con mejor puntuación
+
+```{r}
+aggregate(puntos ~ pais, vinos, max)
+
+```
+
+Variedades mejores puntuadas
+
+```{r}
+aggregate(puntos ~ variedad, vinos, max)
+
+```
 
 
 ## Hipótesis
 
+La variedad de malbec de la Provincia de Mendoza está entre las mejores puntuadas de Argentina y del mundo.
+
+La variable vinos caros no siempre se relaciona con la variable de mejor puntuados, se pueden encontrar vinos como por ejemplo “Las Madras”
+un hallazgo entre precio (18) y mejor puntuación (91).
+
+Francia es el país que tiene la mayor cantidad de vinos mejores puntuados del ranking
 
