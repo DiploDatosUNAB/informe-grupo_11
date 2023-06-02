@@ -1,6 +1,6 @@
 ---
-title: "titulo"
-author: "nombres"
+title: "VINOS"
+author: "SILVINA PICHETTO - FLORENCIA VUONO"
 output: html_document
 ---
 
@@ -8,29 +8,156 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 # Cargar los paquetes necesarios acá
+library(readr)
+library(datos)
+library(dplyr)
+library(ggplot2)
 ```
 
 
 ## Introducción
 
-
+El presente informe presenta un ranking de vinos puntuados según la Revista Wine Esthusiast que cuenta con un equipo de revisores de cata más de 24 000 vinos de todo el mundo cada año, desde Francia e Italia hasta California, Australia, Sudáfrica, Argentina y más. Cuenta con acceso gratuito a la base de datos de calificaciones de vinos, cervezas y licores se puede filtrar por puntuación, precio, cosecha, variedad de uva y región, lo que lo convierte en una herramienta fácil y flexible para encontrar su bebida favorita.
 
 ## Exploración de los datos
 
-
+La base contiene 129.961 vinos puntuados, según país, precio, región, variedad, vina y contiene una pequeña reseña de cada uno.
 ```{r}
 # Código para cargar o leer los datos
+vinos <- read_csv("datos/vinos.csv")
 ```
+
+Promedio de precios de vinos 
+Cual es el precio promedio de la lista de vinos?
+El precio promedio es de 35.36
+
+
+```{r}
+vinos %>% 
+summarise(mean(precio,na.rm=TRUE))
+
+
+```
+
+
+Vinos más caros
+
+```{r}
+filter(vinos,precio >=400)
+
+```
+
+Vinos Mejor puntuados (>= de 95 puntos) por debajo del promedio de precio, osea 35.
+
+```{r}
+Vinos_puntos_precio<- filter(vinos,puntos >=95, precio<=35)
+```
+
+Tomando esta última variable que creamos, vamos a agrupar por país y descubrir cuales son los países productores de estos vinos económicos y mejor puntuados. Cual es el mejor país dentro de este Ranking? España con 96.
+
+```{r}
+Vinos_puntos_precio %>%
+  group_by(pais) %>%
+  summarise(promedio_puntos = mean(puntos, na.rm = TRUE)) %>%
+  ggplot(aes(x = pais, y = promedio_puntos)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(x = "País", y = "Promedio de Puntos") +
+  ggtitle("Promedio de Puntos por País")
+ 
+  
+
+```
+
+
+Ahora vamos a ver cómo viene Argentina en el ranking de precio y calidad...tiene nuestro país vinos que estén económicos por debajo del precio promedio y con buena puntuación? 
+
+```{r}
+ggplot(vinos_argentina, aes(x = puntos, y = precio)) +
+  geom_point(color = "steelblue") +
+  labs(x = "Puntos", y = "Precio") +
+  ggtitle("Vinos de Argentina con Puntos >= 95")
+
+
+
+```
+
+Promedio de puntos de los vinos de Argentina
+
+```{r}
+group_by(vinos_argentina) %>% 
+  summarise(mean(puntos,na.rm=TRUE))  
+            
+```
+
+Promedio de Precios de los vinos de Argentina
+
+```{r}
+
+group_by(vinos_argentina) %>% 
+summarise(mean(precio, na.rm=TRUE))
+
+```
+Vemos que Argentina, tiene un buen promedio en puntaje de vinos, pero está muy por encima del precio promedio de la lista, por lo cual no encontramos vinos baratos y con buen puntaje mayoro igual a 95.
+
+
+
+Ahora vamos a explorar cuales son las variedades mejores puntuadas y económicas
+
+```{r}
+vinos_filtrados <- vinos %>%
+  group_by(variedad) %>%
+  filter(puntos >= 94, precio <= 35)
+
+ggplot(vinos_filtrados, aes(x = variedad, y = puntos)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(x = "Variedad", y = "Puntos") +
+  ggtitle("Vinos por Variedad (Puntos >= 94, Precio <= 35)")
+
+
+
+```
+
+## Hipótesis
+
+La variedad de malbec de la Provincia de Mendoza está entre las mejores puntuadas de Argentina y del mundo.
+
+
+```{r}
+
+subset(vinos, pais == "Argentina" & variedad == "Malbec" & puntos>= 94) 
+  
+```
+
+
+
+La variable  vinos caros no siempre se relaciona con la variable de mejor puntuados, se pueden encontrar vinos con precio (18) y puntuación (94).
+
+
+```{r}
+filter(vinos,precio == 18, puntos>=94)
+
+
+```
+
+Inglaterra es el  país que tiene el mejor promedio de vinos puntuados, 91.58, no Francia según mi hipótesis anterior:(
 
 
 
 ```{r}
-# Cödigo de R acá 
-# Agregá más bloques según sea necesario
+promedio_puntos_pais <- vinos %>%
+  group_by(pais) %>%
+  summarise(promedio_puntos = mean(puntos, na.rm = TRUE))
+
+ggplot(promedio_puntos_pais, aes(x = pais, y = promedio_puntos)) +
+  geom_bar(stat = "identity", fill = "steelblue") +
+  labs(x = "País", y = "Promedio de Puntos") +
+  ggtitle("Promedio de Puntos por País")
+
 ```
 
 
 
-## Hipótesis
+
+
 
 
