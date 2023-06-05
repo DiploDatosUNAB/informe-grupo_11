@@ -9,7 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<<<<<<< HEAD
 <meta name="author" content="SILVINA PICHETTO - FLORENCIA VUONO" />
+=======
+<meta name="author" content="Silvina Pichetto / Florencia Vuono" />
+>>>>>>> 811a5e6050a7aa0d35f32dcd7e5e1dd38cef193f
 
 
 <title>VINOS</title>
@@ -350,7 +354,11 @@ display: none;
 
 
 <h1 class="title toc-ignore">VINOS</h1>
+<<<<<<< HEAD
 <h4 class="author">SILVINA PICHETTO - FLORENCIA VUONO</h4>
+=======
+<h4 class="author">Silvina Pichetto / Florencia Vuono</h4>
+>>>>>>> 811a5e6050a7aa0d35f32dcd7e5e1dd38cef193f
 
 </div>
 
@@ -380,6 +388,7 @@ vinos &lt;- read_csv(&quot;datos/vinos.csv&quot;)</code></pre>
 ## 
 ## ℹ Use `spec()` to retrieve the full column specification for this data.
 ## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<<<<<<< HEAD
 <p>Promedio de precios de vinos Cual es el precio promedio de la lista
 de vinos? El precio promedio es de 35.36</p>
 <pre class="r"><code>vinos %&gt;% 
@@ -390,6 +399,28 @@ summarise(mean(precio,na.rm=TRUE))</code></pre>
 ## 1                         35.4</code></pre>
 <p>Vinos más caros</p>
 <pre class="r"><code>filter(vinos,precio &gt;=400)</code></pre>
+=======
+<p>Promedio de precios de vinos</p>
+<pre class="r"><code>vinos %&gt;%
+ group_by(precio) %&gt;%
+ summarise(precio_promedio = mean(precio, na.rm = TRUE))</code></pre>
+<pre><code>## # A tibble: 391 × 2
+##    precio precio_promedio
+##     &lt;dbl&gt;           &lt;dbl&gt;
+##  1      4               4
+##  2      5               5
+##  3      6               6
+##  4      7               7
+##  5      8               8
+##  6      9               9
+##  7     10              10
+##  8     11              11
+##  9     12              12
+## 10     13              13
+## # ℹ 381 more rows</code></pre>
+<p>Vinos más caros, cuyo valor es superior a 400</p>
+<pre class="r"><code>filter(vinos, precio &gt;=400)</code></pre>
+>>>>>>> 811a5e6050a7aa0d35f32dcd7e5e1dd38cef193f
 <pre><code>## # A tibble: 196 × 10
 ##    pais     nombre      puntos precio provincia region_1 region_2 variedad vina 
 ##    &lt;chr&gt;    &lt;chr&gt;        &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;
@@ -405,6 +436,7 @@ summarise(mean(precio,na.rm=TRUE))</code></pre>
 ## 10 Francia  &lt;NA&gt;            97    550 Burgundy  Chevali… &lt;NA&gt;     Chardon… Doma…
 ## # ℹ 186 more rows
 ## # ℹ 1 more variable: titulo_resena &lt;chr&gt;</code></pre>
+<<<<<<< HEAD
 <p>Vinos Mejor puntuados (&gt;= de 95 puntos) por debajo del promedio de
 precio, osea 35.</p>
 <pre class="r"><code>Vinos_puntos_precio&lt;- filter(vinos,puntos &gt;=95, precio&lt;=35)</code></pre>
@@ -467,11 +499,829 @@ económicas</p>
 ## 10 Italia        Contr…     95     30 Sicily &amp;… Etna     &lt;NA&gt;     Ensambl… Bion…
 ## # ℹ 391 more rows
 ## # ℹ 1 more variable: titulo_resena &lt;chr&gt;</code></pre>
+=======
+<p>Vinos baratos, cuyo un valor es inferior a 20</p>
+<pre class="r"><code>filter(vinos, precio &lt;=20)</code></pre>
+<pre><code>## # A tibble: 46,341 × 10
+##    pais          nombre puntos precio provincia region_1 region_2 variedad vina 
+##    &lt;chr&gt;         &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;
+##  1 Portugal      Avida…     87     15 Douro     &lt;NA&gt;     &lt;NA&gt;     Portugu… Quin…
+##  2 Estados Unid… &lt;NA&gt;       87     14 Oregon    Willame… Willame… Pinot G… Rain…
+##  3 Estados Unid… Reser…     87     13 Michigan  Lake Mi… &lt;NA&gt;     Riesling St. …
+##  4 España        Ars I…     87     15 Northern… Navarra  &lt;NA&gt;     Tempran… Tand…
+##  5 Italia        Belsi…     87     16 Sicily &amp;… Vittoria &lt;NA&gt;     Frappato Terr…
+##  6 Alemania      Shine      87     12 Rheinhes… &lt;NA&gt;     &lt;NA&gt;     Gewürzt… Hein…
+##  7 Estados Unid… Mount…     87     19 Californ… Napa Va… Napa     Caberne… Kirk…
+##  8 Estados Unid… &lt;NA&gt;       87     12 Californ… Central… Central… Chardon… Mira…
+##  9 Argentina     Winem…     87     13 Mendoza   Mendoza  &lt;NA&gt;     Malbec   Gauc…
+## 10 Estados Unid… &lt;NA&gt;       87     20 Oregon    Oregon   Oregon … Pinot N… Acro…
+## # ℹ 46,331 more rows
+## # ℹ 1 more variable: titulo_resena &lt;chr&gt;</code></pre>
+<p>Vinos mejor puntuados, cuya puntuación es superior a 100</p>
+<pre class="r"><code>filter(vinos, puntos&gt;=100 )</code></pre>
+<pre><code>## # A tibble: 19 × 10
+##    pais          nombre puntos precio provincia region_1 region_2 variedad vina 
+##    &lt;chr&gt;         &lt;chr&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;
+##  1 Australia     Rare      100    350 Victoria  Rutherg… &lt;NA&gt;     Muscat   Cham…
+##  2 Italia        Occhi…    100    210 Tuscany   Vin San… &lt;NA&gt;     Prugnol… Avig…
+##  3 Francia       Brut      100    259 Champagne Champag… &lt;NA&gt;     Champag… Krug 
+##  4 Italia        Masse…    100    460 Tuscany   Toscana  &lt;NA&gt;     Merlot   Tenu…
+##  5 Portugal      Barca…    100    450 Douro     &lt;NA&gt;     &lt;NA&gt;     Portugu… Casa…
+##  6 Italia        Riser…    100    550 Tuscany   Brunell… &lt;NA&gt;     Sangiov… Bion…
+##  7 Estados Unid… &lt;NA&gt;      100    200 Californ… Napa Va… Napa     Caberne… Card…
+##  8 Francia       &lt;NA&gt;      100    150 Bordeaux  Saint-J… &lt;NA&gt;     Bordeau… Chât…
+##  9 Francia       Crist…    100    250 Champagne Champag… &lt;NA&gt;     Champag… Loui…
+## 10 Francia       Le Me…    100    617 Champagne Champag… &lt;NA&gt;     Chardon… Salon
+## 11 Francia       &lt;NA&gt;      100   1500 Bordeaux  Pauillac &lt;NA&gt;     Bordeau… Chât…
+## 12 Italia        Cerre…    100    270 Tuscany   Brunell… &lt;NA&gt;     Sangiov… Casa…
+## 13 Francia       &lt;NA&gt;      100   1500 Bordeaux  Saint-É… &lt;NA&gt;     Bordeau… Chât…
+## 14 Francia       &lt;NA&gt;      100    359 Bordeaux  Saint-J… &lt;NA&gt;     Bordeau… Chât…
+## 15 Estados Unid… Royal…    100     80 Washingt… Columbi… Columbi… Syrah    Char…
+## 16 Portugal      Nacio…    100    650 Port      &lt;NA&gt;     &lt;NA&gt;     Port     Quin…
+## 17 Estados Unid… La Mu…    100    450 Californ… Sonoma … Sonoma   Bordeau… Veri…
+## 18 Francia       &lt;NA&gt;      100    848 Bordeaux  Pessac-… &lt;NA&gt;     Bordeau… Chât…
+## 19 Estados Unid… Bioni…    100     80 Washingt… Walla W… Columbi… Syrah    Cayu…
+## # ℹ 1 more variable: titulo_resena &lt;chr&gt;</code></pre>
+<p>Mejores vinos puntuados de Argentina</p>
+<pre class="r"><code>subset(vinos, pais == &quot;Argentina&quot; &amp; puntos &gt;= 95)</code></pre>
+<pre><code>## # A tibble: 11 × 10
+##    pais      nombre     puntos precio provincia region_1 region_2 variedad vina 
+##    &lt;chr&gt;     &lt;chr&gt;       &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;    &lt;chr&gt;
+##  1 Argentina Finca Ped…     95     74 Mendoza   Mendoza  &lt;NA&gt;     Caberne… Pasc…
+##  2 Argentina Vineyard …     95     62 Mendoza   Mendoza  &lt;NA&gt;     Bordeau… Finc…
+##  3 Argentina Single Pa…     95    100 Mendoza   Luján d… &lt;NA&gt;     Malbec   Terr…
+##  4 Argentina Reserva        95     90 Otra      Salta    &lt;NA&gt;     Malbec   Colo…
+##  5 Argentina Nicasia V…     97    120 Mendoza   Mendoza  &lt;NA&gt;     Malbec   Bode…
+##  6 Argentina Finca Jor…     95     50 Mendoza   La Cons… &lt;NA&gt;     Malbec   Trap…
+##  7 Argentina Single Vi…     95     48 Mendoza   Valle d… &lt;NA&gt;     Malbec   Alta…
+##  8 Argentina Gran Cort…     96     50 Mendoza   Tupunga… &lt;NA&gt;     Bordeau… Rigl…
+##  9 Argentina Single Vi…     96     48 Mendoza   Mendoza  &lt;NA&gt;     Malbec   Alta…
+## 10 Argentina Cobos Mar…     95    225 Mendoza   Mendoza  &lt;NA&gt;     Malbec   Viña…
+## 11 Argentina Corte A        95     50 Mendoza   Mendoza  &lt;NA&gt;     Ensambl… Vist…
+## # ℹ 1 more variable: titulo_resena &lt;chr&gt;</code></pre>
+<p>Paise con mejor puntuación</p>
+<pre class="r"><code>aggregate(puntos ~ pais, vinos, max)</code></pre>
+<pre><code>##                    pais puntos
+## 1              Alemania     98
+## 2             Argentina     97
+## 3               Armenia     88
+## 4             Australia    100
+## 5               Austria     98
+## 6  Bosnia y Herzegovina     88
+## 7                Brazil     89
+## 8              Bulgaria     91
+## 9                Canadá     94
+## 10                Chile     95
+## 11                China     89
+## 12               Chipre     89
+## 13              Croacia     91
+## 14               Egipto     84
+## 15           Eslovaquia     87
+## 16            Eslovenia     92
+## 17               España     98
+## 18       Estados Unidos    100
+## 19              Francia    100
+## 20              Georgia     92
+## 21               Grecia     93
+## 22              Hungría     97
+## 23                India     93
+## 24           Inglaterra     95
+## 25               Israel     94
+## 26               Italia    100
+## 27               Líbano     91
+## 28           Luxemburgo     90
+## 29            Macedonia     89
+## 30            Marruecos     93
+## 31               México     92
+## 32             Moldavia     91
+## 33        Nueva Zelanda     95
+## 34                 Perú     86
+## 35             Portugal    100
+## 36      República Checa     89
+## 37              Rumania     92
+## 38               Serbia     89
+## 39            Sudáfrica     95
+## 40                Suiza     90
+## 41              Turquía     92
+## 42              Ucrania     88
+## 43              Uruguay     92</code></pre>
+<p>Variedades mejores puntuadas</p>
+<pre class="r"><code>aggregate(puntos ~ variedad, vinos, max)</code></pre>
+<pre><code>##                                variedad puntos
+## 1                              Abouriou     91
+## 2                           Agiorgitiko     92
+## 3                             Aglianico     97
+## 4                                Aidani     82
+## 5                                 Airen     83
+## 6                                Albana     94
+## 7                             Albanello     86
+## 8                              Albariño     94
+## 9                             Albarossa     88
+## 10                             Aleatico     90
+## 11                          Alfrocheiro     93
+## 12                             Alicante     89
+## 13                    Alicante Bouschet     93
+## 14                              Aligoté     91
+## 15             Alsace Ensamblaje Blanco     96
+## 16                              Altesse     90
+## 17                           Alvarelhão     88
+## 18                            Alvarinho     93
+## 19                 Alvarinho-Chardonnay     88
+## 20                             Ansonica     87
+## 21                            Antão Vaz     90
+## 22                                Apple     89
+## 23                             Aragonês     91
+## 24                             Aragonez     91
+## 25                              Argaman     91
+## 26                               Arinto     92
+## 27                               Arneis     92
+## 28                             Asprinio     85
+## 29                            Assyrtico     92
+## 30                            Assyrtiko     93
+## 31                               Athiri     83
+## 32           Austrian Ensamblaje Blanco     96
+## 33            Austrian Ensamblaje Tinto     94
+## 34                            Auxerrois     91
+## 35                               Avesso     89
+## 36                                 Azal     87
+## 37                                Babić     89
+## 38                         Babosa Negro     92
+## 39                              Bacchus     91
+## 40                            Baco Noir     91
+## 41                                 Baga     93
+## 42                Baga-Touriga Nacional     91
+## 43                              Barbera     94
+## 44                     Barbera-Nebbiolo     87
+## 45                             Bastardo     86
+## 46                             Biancale     85
+## 47                          Biancolella     85
+## 48                       Biancu Gentile     89
+## 49                                Bical     90
+## 50                        Black Monukka     92
+## 51                         Black Muscat     92
+## 52                        Blanc du Bois     87
+## 53                          Blanco Port     92
+## 54                      Blanco Riesling     96
+## 55                              Blatina     88
+## 56                           Blauburger     87
+## 57                        Blauburgunder     93
+## 58                   Blauer Portugieser     87
+## 59                        Blaufränkisch     95
+## 60                                Bobal     92
+## 61             Bobal-Cabernet Sauvignon     84
+## 62                            Boğazkere     91
+## 63                       Bombino Bianco     88
+## 64                         Bombino Nero     87
+## 65                              Bonarda     92
+## 66             Bordeaux-style Red Blend    100
+## 67           Bordeaux-style White Blend    100
+## 68                               Bovale     91
+## 69                            Brachetto     86
+## 70                              Braucol     93
+## 71                                 Bual     98
+## 72                             Cabernet     91
+## 73                      Cabernet-Malbec     86
+## 74                      Cabernet-Shiraz     96
+## 75                       Cabernet-Syrah     93
+## 76                       Cabernet Blend     93
+## 77                       Cabernet Franc     97
+## 78    Cabernet Franc-Cabernet Sauvignon     94
+## 79             Cabernet Franc-Carmenère     86
+## 80             Cabernet Franc-Lemberger     88
+## 81                Cabernet Franc-Malbec     91
+## 82                Cabernet Franc-Merlot     93
+## 83                      Cabernet Merlot     91
+## 84                     Cabernet Moravia     88
+## 85                     Cabernet Pfeffer     91
+## 86                   Cabernet Sauvignon    100
+## 87           Cabernet Sauvignon-Barbera     84
+## 88    Cabernet Sauvignon-Cabernet Franc     93
+## 89         Cabernet Sauvignon-Carmenère     93
+## 90            Cabernet Sauvignon-Malbec     95
+## 91            Cabernet Sauvignon-Merlot     96
+## 92     Cabernet Sauvignon-Merlot-Shiraz     91
+## 93        Cabernet Sauvignon-Sangiovese     92
+## 94            Cabernet Sauvignon-Shiraz     94
+## 95             Cabernet Sauvignon-Syrah     96
+## 96       Cabernet Sauvignon-Tempranillo     88
+## 97          Cabernet Sauvignon Grenache     89
+## 98                            Çalkarası     87
+## 99                             Canaiolo     89
+## 100                            Cannonau     92
+## 101                          Caprettone     92
+## 102                           Carcajolu     88
+## 103                            Carignan     96
+## 104                   Carignan-Grenache     92
+## 105                      Carignan-Syrah     92
+## 106                           Carignane     92
+## 107                           Carignano     92
+## 108                            Carineña     90
+## 109                   Cariñena-Garnacha     90
+## 110                           Carmenère     94
+## 111        Carmenère-Cabernet Sauvignon     92
+## 112                     Carmenère-Syrah     91
+## 113                          Carricante     95
+## 114                         Casavecchia     90
+## 115                            Castelão     93
+## 116                         Catalanesca     89
+## 117                          Catarratto     89
+## 118                              Cayuga     85
+## 119                         Centesimino     92
+## 120                             Cerceal     91
+## 121                             Cercial     88
+## 122                            Cesanese     90
+## 123                   Cesanese d&#39;Affile     90
+## 124                         Chambourcin     87
+## 125                Champagne Ensamblaje    100
+## 126                          Chancellor     81
+## 127                            Charbono     93
+## 128                           Chardonel     83
+## 129                          Chardonnay    100
+## 130                 Chardonnay-Albariño     92
+## 131              Chardonnay-Pinot Blanc     91
+## 132               Chardonnay-Pinot Gris     85
+## 133                 Chardonnay-Riesling     87
+## 134                Chardonnay-Sauvignon     89
+## 135          Chardonnay-Sauvignon Blanc     88
+## 136                 Chardonnay-Semillon     91
+## 137                 Chardonnay-Viognier     88
+## 138           Chardonnay Weissburgunder     94
+## 139                           Chasselas     90
+## 140                             Chelois     87
+## 141                        Chenin Blanc     99
+## 142             Chenin Blanc-Chardonnay     92
+## 143        Chenin Blanc-Sauvignon Blanc     86
+## 144               Chenin Blanc-Viognier     90
+## 145                             Chinuri     87
+## 146                          Ciliegiolo     89
+## 147                            Cinsault     93
+## 148                           Clairette     90
+## 149                              Claret     93
+## 150                          Cococciola     86
+## 151                       Coda di Volpe     89
+## 152                   Códega do Larinho     88
+## 153                           Colombard     91
+## 154           Colombard-Sauvignon Blanc     87
+## 155                Colombard-Ugni Blanc     86
+## 156                            Colorino     86
+## 157                             Cortese     89
+## 158                             Corvina     94
+## 159       Corvina, Rondinella, Molinara     96
+## 160                            Counoise     91
+## 161                               Dafni     85
+## 162                               Debit     89
+## 163                             Diamond     86
+## 164                            Dolcetto     92
+## 165                         Doña Blanca     84
+## 166                          Dornfelder     93
+## 167                               Duras     91
+## 168                             Durella     92
+## 169                               Durif     88
+## 170                         Edelzwicker     90
+## 171                            Ekigaïna     85
+## 172                             Elbling     89
+## 173                                Emir     88
+## 174                           Encruzado     92
+## 175                   Ensamblaje Blanco     97
+## 176        Ensamblaje Blanco Tipo Rhône     95
+## 177                    Ensamblaje Tinto     99
+## 178         Ensamblaje Tinto Tipo Rhône     98
+## 179                            Erbaluce     88
+## 180                           Espadeiro     84
+## 181                          Falanghina     94
+## 182                            Favorita     90
+## 183                        Fer Servadou     87
+## 184                        Fernão Pires     93
+## 185                            Feteasca     88
+## 186                     Feteasca Neagra     89
+## 187                     Feteascǎ Regalǎ     88
+## 188                               Fiano     94
+## 189                       Folle Blanche     85
+## 190                            Forcallà     83
+## 191                            Francisa     91
+## 192                           Franconia     86
+## 193                           Frankovka     88
+## 194                            Frappato     91
+## 195                              Freisa     87
+## 196                            Friulano     94
+## 197                        Früburgunder     90
+## 198                          Fumé Blanc     95
+## 199                             Furmint     96
+## 200                               G-S-M     95
+## 201                           Gaglioppo     91
+## 202                               Gamay     94
+## 203                          Gamay Noir     91
+## 204                               Gamza     89
+## 205                           Garganega     95
+## 206                            Garnacha     95
+## 207                   Garnacha-Cabernet     85
+## 208                   Garnacha-Cariñena     93
+## 209                 Garnacha-Monastrell     89
+## 210                      Garnacha-Syrah     87
+## 211                Garnacha-Tempranillo     87
+## 212                     Garnacha Blanca     91
+## 213                 Garnacha Ensamblaje     89
+## 214                  Garnacha Tintorera     91
+## 215                  Gelber Muskateller     92
+## 216                     Gelber Traminer     95
+## 217                      Gewürztraminer     96
+## 218             Gewürztraminer-Riesling     91
+## 219                               Glera     94
+## 220                             Godello     91
+## 221                             Gouveio     89
+## 222                            Graciano     94
+## 223                            Gragnano     84
+## 224                           Graševina     89
+## 225                       Grauburgunder     91
+## 226                           Grecanico     92
+## 227                           Grechetto     90
+## 228                               Greco     94
+## 229                        Greco Bianco     87
+## 230                            Grenache     97
+## 231                   Grenache-Carignan     93
+## 232                  Grenache-Mourvèdre     92
+## 233                     Grenache-Shiraz     90
+## 234                      Grenache-Syrah     94
+## 235                      Grenache Blanc     93
+## 236                 Grenache Ensamblaje     95
+## 237                       Grenache Gris     87
+## 238                       Grenache Noir     91
+## 239                          Grignolino     87
+## 240                              Grillo     93
+## 241                            Grolleau     90
+## 242                           Groppello     87
+## 243              Gros and Petit Manseng     93
+## 244                        Gros Manseng     92
+## 245                          Gros Plant     86
+## 246                    Grüner Veltliner     96
+## 247                          Hárslevelü     90
+## 248                     Hondarrabi Zuri     90
+## 249                    Incrocio Manzoni     89
+## 250                             Insolia     89
+## 251                             Inzolia     88
+## 252                        Irsai Oliver     87
+## 253                            Jacquère     90
+## 254                             Jacquez     87
+## 255                                Jaen     93
+## 256                              Jampal     88
+## 257               Johannisberg Riesling     88
+## 258                             Kadarka     89
+## 259                      Kalecik Karasi     91
+## 260                             Kangoun     87
+## 261                           Karalahna     87
+## 262                           Karasakiz     89
+## 263                          Kekfrankos     91
+## 264                              Kerner     95
+## 265                     Kinali Yapincak     84
+## 266                                Kisi     89
+## 267                           Kotsifali     92
+## 268                              Kuntra     86
+## 269                             Lagrein     91
+## 270                           Lambrusco     90
+## 271                Lambrusco di Sorbara     93
+## 272               Lambrusco Grasparossa     91
+## 273                  Lambrusco Salamino     90
+## 274                           Lemberger     91
+## 275                        Listán Negro     91
+## 276                      Loin de l&#39;Oeil     93
+## 277                            Loureiro     92
+## 278                     Loureiro-Arinto     86
+## 279                             Macabeo     93
+## 280                  Macabeo-Chardonnay     87
+## 281                    Macabeo-Moscatel     85
+## 282                       Madeira Blend     90
+## 283                  Madeleine Angevine     86
+## 284                           Magliocco     90
+## 285                          Malagousia     92
+## 286                          Malagouzia     90
+## 287               Malagouzia-Chardonnay     86
+## 288                              Malbec     97
+## 289                      Malbec-Bonarda     90
+## 290                     Malbec-Cabernet     93
+## 291               Malbec-Cabernet Franc     92
+## 292           Malbec-Cabernet Sauvignon     94
+## 293                    Malbec-Carménère     91
+## 294                       Malbec-Merlot     93
+## 295                 Malbec-Petit Verdot     91
+## 296                        Malbec-Syrah     89
+## 297                       Malbec-Tannat     93
+## 298                  Malbec-Tempranillo     87
+## 299                   Malbec Ensamblaje     92
+## 300                              Malvar     88
+## 301                            Malvasia     93
+## 302                      Malvasia-Viura     89
+## 303                     Malvasia Bianca     92
+## 304                  Malvasia di Candia     88
+## 305                       Malvasia Fina     89
+## 306                   Malvasia Istriana     90
+## 307                       Malvasia Nera     89
+## 308                          Mandilaria     90
+## 309                             Mansois     88
+## 310                           Mantonico     91
+## 311                             Manzoni     88
+## 312                              Marawi     88
+## 313                         Maria Gomes     88
+## 314                   Maria Gomes-Bical     86
+## 315                           Marquette     86
+## 316                            Marsanne     92
+## 317                  Marsanne-Roussanne     92
+## 318                   Marsanne-Viognier     89
+## 319                            Marselan     90
+## 320                           Marzemino     88
+## 321                              Mataro     94
+## 322                            Maturana     88
+## 323                              Mauzac     90
+## 324                         Mavrodaphne     88
+## 325                      Mavrokalavryta     86
+## 326                        Mavrotragano     90
+## 327                            Mavroudi     87
+## 328                              Mavrud     90
+## 329                             Mazuelo     91
+## 330                              Melnik     89
+## 331                               Melon     93
+## 332                              Mencía     93
+## 333                            Meritage     94
+## 334                              Merlot    100
+## 335                      Merlot-Argaman     85
+## 336                     Merlot-Cabernet     92
+## 337               Merlot-Cabernet Franc     94
+## 338           Merlot-Cabernet Sauvignon     94
+## 339                     Merlot-Grenache     89
+## 340                       Merlot-Malbec     89
+## 341                Merlot-Petite Verdot     83
+## 342                       Merlot-Shiraz     86
+## 343                        Merlot-Syrah     89
+## 344                       Merlot-Tannat     93
+## 345          Merseguera-Sauvignon Blanc     85
+## 346                           Meseguera     91
+## 347                              Misket     85
+## 348                             Mission     96
+## 349                            Molinara     87
+## 350                          Monastrell     97
+## 351             Monastrell-Petit Verdot     89
+## 352                    Monastrell-Syrah     92
+## 353                            Mondeuse     90
+## 354                              Monica     88
+## 355                       Montepulciano     94
+## 356                              Morava     87
+## 357                            Morillon     93
+## 358                        Morio Muskat     90
+## 359                          Moscadello     94
+## 360                            Moscatel     94
+## 361              Moscatel de Alejandría     88
+## 362                     Moscatel Graúdo     88
+## 363                       Moscatel Roxo     94
+## 364                             Moscato     95
+## 365                     Moscato di Noto     92
+## 366                      Moscato Giallo     94
+## 367                        Moscato Rosa     90
+## 368                        Moschofilero     93
+## 369             Moschofilero-Chardonnay     85
+## 370                           Mourvèdre     95
+## 371                     Mourvèdre-Syrah     94
+## 372                             Mtsvane     90
+## 373                      Müller-Thurgau     93
+## 374                            Muscadel     88
+## 375                          Muscadelle     99
+## 376                           Muscadine     86
+## 377                              Muscat    100
+## 378                        Muscat Blanc     92
+## 379        Muscat Blanc à Petits Grains     87
+## 380                      Muscat Canelli     95
+## 381                 Muscat d&#39;Alexandrie     88
+## 382                      Muscat Hamburg     90
+## 383                Muscat of Alexandria     91
+## 384                            Muscatel     88
+## 385                              Muskat     91
+## 386                      Muskat Ottonel     93
+## 387                         Muskateller     89
+## 388                             Narince     89
+## 389                            Nascetta     90
+## 390                               Nasco     91
+## 391                            Nebbiolo     99
+## 392                            Negrette     91
+## 393                          Negroamaro     91
+## 394                   Nerello Cappuccio     92
+## 395                   Nerello Mascalese     97
+## 396                        Nero d&#39;Avola     94
+## 397                       Nero di Troia     92
+## 398                           Neuburger     92
+## 399                           Nielluciu     90
+## 400                              Norton     86
+## 401                             Nosiola     94
+## 402                             Nuragus     89
+## 403                            Ojaleshi     88
+## 404                            Okuzgozu     92
+## 405                              Ondenc     90
+## 406                       Orange Muscat     93
+## 407                        Orangetraube     90
+## 408                                Otra     89
+## 409                   Otskhanuri Sapere     90
+## 410                                País     83
+## 411                         Pallagrello     90
+## 412                  Pallagrello Bianco     88
+## 413                    Pallagrello Nero     90
+## 414                            Palomino     92
+## 415                        Pansa Blanca     89
+## 416                         Papaskarasi     88
+## 417                           Paralleda     83
+## 418                           Parraleta     86
+## 419                           Passerina     91
+## 420                            Pecorino     90
+## 421                       Pedro Ximénez     96
+## 422                           Perricone     91
+## 423                        Petit Courbu     88
+## 424                       Petit Manseng     95
+## 425                       Petit Meslier     89
+## 426                        Petit Verdot     94
+## 427                        Petite Sirah     95
+## 428                       Petite Verdot     94
+## 429                            Picapoll     82
+## 430                             Picolit     97
+## 431                             Picpoul     93
+## 432                          Piedirosso     91
+## 433                              Pigato     84
+## 434                          Pignoletto     87
+## 435                             Pignolo     92
+## 436                    Pinot-Chardonnay     90
+## 437                     Pinot Auxerrois     90
+## 438                        Pinot Bianco     95
+## 439                         Pinot Blanc     93
+## 440              Pinot Blanc-Chardonnay     90
+## 441              Pinot Blanc-Pinot Noir     85
+## 442                Pinot Blanc-Viognier     87
+## 443                        Pinot Grigio     92
+## 444        Pinot Grigio-Sauvignon Blanc     87
+## 445                          Pinot Gris     96
+## 446           Pinot Gris-Gewürztraminer     90
+## 447                       Pinot Meunier     94
+## 448                          Pinot Nero     94
+## 449                          Pinot Noir     99
+## 450                    Pinot Noir-Gamay     90
+## 451                    Pinot Noir-Syrah     93
+## 452                            Pinotage     93
+## 453                     Pinotage-Merlot     84
+## 454                     Piquepoul Blanc     88
+## 455                         Plavac Mali     91
+## 456                               Plyto     87
+## 457                                Port    100
+## 458                Portuguese Espumante     92
+## 459                      Portuguese Red    100
+## 460                     Portuguese Rosé     89
+## 461                    Portuguese White     95
+## 462                         Portuguiser     86
+## 463                               Posip     89
+## 464                            Poulsard     89
+## 465                             Premsal     83
+## 466                          Prié Blanc     89
+## 467                       Prieto Picudo     92
+## 468                           Primitivo     93
+## 469                            Prosecco     91
+## 470          Provance Ensamblaje Blanco     92
+## 471           Provance Ensamblaje Tinto     95
+## 472                    Prugnolo Gentile    100
+## 473                           Prunelard     91
+## 474                          Pugnitello     89
+## 475                            Rabigato     89
+## 476                              Raboso     89
+## 477                             Ramisco     93
+## 478                         Rara Neagra     90
+## 479                                Rebo     89
+## 480                              Rebula     89
+## 481                             Refosco     89
+## 482                      Ribolla Gialla     94
+## 483                           Rieslaner     92
+## 484                            Riesling     98
+## 485                 Riesling-Chardonnay     94
+## 486                             Rivaner     88
+## 487                          Rkatsiteli     92
+## 488                              Robola     90
+## 489                             Roditis     87
+## 490                Roditis-Moschofilero     88
+## 491                               Rolle     90
+## 492                          Romorantin     91
+## 493                              Rosado     89
+## 494                              Rosato     91
+## 495                            Roscetto     88
+## 496                                Rosé     96
+## 497                    Rosenmuskateller     93
+## 498                      Roter Traminer     92
+## 499                     Roter Veltliner     92
+## 500                          Rotgipfler     92
+## 501                           Roussanne     94
+## 502            Roussanne-Grenache Blanc     91
+## 503                  Roussanne-Marsanne     91
+## 504                  Roussanne-Viognier     92
+## 505                            Roviello     93
+## 506                               Ruché     89
+## 507                              Rufete     86
+## 508                      Ryzlink Rýnský     89
+## 509                                Sacy     87
+## 510                          Sagrantino     96
+## 511                             Sämling     94
+## 512                          Sangiovese    100
+## 513       Sangiovese-Cabernet Sauvignon     90
+## 514                    Sangiovese-Syrah     90
+## 515                 Sangiovese Cabernet     91
+## 516                   Sangiovese Grosso    100
+## 517                            Saperavi     90
+## 518                     Saperavi-Merlot     90
+## 519                           Sauvignon     95
+## 520                  Sauvignon-Sémillon     86
+## 521                     Sauvignon Blanc     96
+## 522           Sauvignon Blanc-Assyrtiko     92
+## 523          Sauvignon Blanc-Chardonnay     93
+## 524        Sauvignon Blanc-Chenin Blanc     87
+## 525      Sauvignon Blanc-Sauvignon Gris     86
+## 526            Sauvignon Blanc-Semillon     94
+## 527             Sauvignon Blanc-Verdejo     86
+## 528                      Sauvignon Gris     94
+## 529                    Sauvignon Musqué     87
+## 530                       Sauvignonasse     90
+## 531                            Savagnin     94
+## 532                           Savatiano     90
+## 533                           Scheurebe     97
+## 534                             Schiava     90
+## 535                    Schwartzriesling     90
+## 536                        Sciaccerellu     90
+## 537                            Sémillon     96
+## 538                 Semillon-Chardonnay     89
+## 539            Semillon-Sauvignon Blanc     98
+## 540                             Sercial     94
+## 541                        Seyval Blanc     87
+## 542                              Sherry     94
+## 543                              Shiraz     99
+## 544                     Shiraz-Cabernet     87
+## 545           Shiraz-Cabernet Sauvignon     95
+## 546                     Shiraz-Grenache     92
+## 547                       Shiraz-Malbec     92
+## 548                    Shiraz-Mourvèdre     89
+## 549                    Shiraz-Roussanne     90
+## 550                  Shiraz-Tempranillo     84
+## 551                     Shiraz-Viognier     97
+## 552                           Sideritis     85
+## 553                          Siegerrebe     84
+## 554                            Silvaner     96
+## 555                   Silvaner-Traminer     86
+## 556                               Siria     90
+## 557                              Sirica     93
+## 558                              Sousão     90
+## 559                              Souzao     87
+## 560                     Sparkling Blend     98
+## 561                       Spätburgunder     95
+## 562                         St. Laurent     95
+## 563                         St. Vincent     85
+## 564                        Susumaniello     93
+## 565                            Sylvaner     93
+## 566                            Symphony     88
+## 567                               Syrah    100
+## 568                       Syrah-Bonarda     87
+## 569                      Syrah-Cabernet     93
+## 570                Syrah-Cabernet Franc     92
+## 571            Syrah-Cabernet Sauvignon     94
+## 572                      Syrah-Carignan     92
+## 573                      Syrah-Grenache     95
+## 574             Syrah-Grenache-Viognier     90
+## 575                        Syrah-Malbec     89
+## 576                        Syrah-Merlot     90
+## 577                     Syrah-Mourvèdre     93
+## 578                  Syrah-Petit Verdot     94
+## 579                  Syrah-Petite Sirah     94
+## 580                   Syrah-Tempranillo     92
+## 581                      Syrah-Viognier     94
+## 582                Tămâioasă Românească     89
+## 583                            Tamianka     89
+## 584                           Tamjanika     88
+## 585                              Tannat     96
+## 586                     Tannat-Cabernet     94
+## 587               Tannat-Cabernet Franc     94
+## 588                       Tannat-Merlot     94
+## 589                        Tannat-Syrah     93
+## 590                         Tempranillo     97
+## 591      Tempranillo-Cabernet Sauvignon     93
+## 592                Tempranillo-Garnacha     89
+## 593                  Tempranillo-Malbec     91
+## 594                  Tempranillo-Merlot     92
+## 595                  Tempranillo-Shiraz     88
+## 596                   Tempranillo-Syrah     91
+## 597                  Tempranillo-Tannat     88
+## 598                  Tempranillo Blanco     86
+## 599              Tempranillo Ensamblaje     96
+## 600                               Teran     91
+## 601                           Teroldego     95
+## 602                 Teroldego Rotaliano     86
+## 603                           Terrantez     95
+## 604                        Thrapsathiri     88
+## 605                           Timorasso     92
+## 606                       Tinta Amarela     90
+## 607                       Tinta Barroca     91
+## 608                           Tinta Cao     90
+## 609                       Tinta de Toro     97
+## 610                      Tinta del Pais     96
+## 611                      Tinta del Toro     91
+## 612                          Tinta Fina     91
+## 613                     Tinta Francisca     91
+## 614                       Tinta Madeira     89
+## 615                         Tinta Miúda     89
+## 616                    Tinta Negra Mole     92
+## 617                         Tinta Roriz     94
+## 618                            Tintilia     87
+## 619                      Tinto del Pais     96
+## 620                          Tinto Fino     98
+## 621                       Tinto Velasco     85
+## 622                               Tocai     93
+## 623                      Tocai Friulano     93
+## 624                              Tokaji     96
+## 625                               Tokay     98
+## 626                    Tokay Pinot Gris     89
+## 627                             Torbato     91
+## 628                            Torontel     92
+## 629                           Torrontés     92
+## 630                             Touriga     90
+## 631                      Touriga Franca     91
+## 632                    Touriga Nacional     95
+## 633 Touriga Nacional-Cabernet Sauvignon     92
+## 634         Touriga Nacional Ensamblaje     93
+## 635                           Trajadura     86
+## 636                            Traminer     96
+## 637                          Traminette     89
+## 638                           Trebbiano     93
+## 639                 Trebbiano di Lugana     88
+## 640                 Trebbiano Spoletino     89
+## 641                          Treixadura     88
+## 642                              Trepat     91
+## 643                         Trincadeira     92
+## 644                          Trollinger     93
+## 645                           Trousseau     91
+## 646                      Trousseau Gris     93
+## 647                        Tsapournakos     90
+## 648                          Tsolikouri     87
+## 649                            Turbiana     94
+## 650                          Ugni Blanc     92
+## 651                Ugni Blanc-Colombard     87
+## 652                        Uva di Troia     92
+## 653                             Uvalino     88
+## 654                           Valdiguié     90
+## 655                       Valvin Muscat     87
+## 656                           Veltliner     92
+## 657                             Verdeca     90
+## 658                             Verdejo     92
+## 659             Verdejo-Sauvignon Blanc     87
+## 660                       Verdejo-Viura     88
+## 661                            Verdelho     96
+## 662                          Verdicchio     95
+## 663                              Verdil     86
+## 664                          Verdosilla     84
+## 665                            Verduzzo     94
+## 666                   Verduzzo Friulano     90
+## 667                          Vermentino     94
+## 668                     Vermentino Nero     88
+## 669                           Vernaccia     94
+## 670                           Vespaiolo     92
+## 671                           Vespolina     88
+## 672                           Vidadillo     89
+## 673                               Vidal     92
+## 674                         Vidal Blanc     92
+## 675                            Vignoles     88
+## 676                              Vilana     89
+## 677                              Vinhão     88
+## 678                            Viognier     96
+## 679                 Viognier-Chardonnay     89
+## 680             Viognier-Gewürztraminer     86
+## 681             Viognier-Grenache Blanc     91
+## 682                   Viognier-Marsanne     90
+## 683                  Viognier-Roussanne     94
+## 684                  Viognier-Valdiguié     84
+## 685                            Viosinho     91
+## 686                               Vital     90
+## 687                            Vitovska     91
+## 688                               Viura     92
+## 689                    Viura-Chardonnay     87
+## 690                       Viura-Verdejo     86
+## 691                              Vranac     86
+## 692                              Vranec     89
+## 693                      Weissburgunder     93
+## 694                      Welschriesling     98
+## 695                            Xarel-lo     88
+## 696                           Xinisteri     89
+## 697                           Xinomavro     92
+## 698                           Xynisteri     89
+## 699                            Yapincak     87
+## 700                               Zelen     88
+## 701                             Zibibbo     95
+## 702                         Zierfandler     93
+## 703              Zierfandler-Rotgipfler     92
+## 704                             Žilavka     88
+## 705                           Zinfandel     97
+## 706                            Zlahtina     88
+## 707                            Zweigelt     94</code></pre>
+>>>>>>> 811a5e6050a7aa0d35f32dcd7e5e1dd38cef193f
 </div>
 <div id="hipótesis" class="section level2">
 <h2>Hipótesis</h2>
 <p>La variedad de malbec de la Provincia de Mendoza está entre las
 mejores puntuadas de Argentina y del mundo.</p>
+<<<<<<< HEAD
 <pre class="r"><code>subset(vinos, pais == &quot;Argentina&quot; &amp; variedad == &quot;Malbec&quot; &amp; puntos&gt;= 94) </code></pre>
 <pre><code>## # A tibble: 37 × 10
 ##    pais      nombre     puntos precio provincia region_1 region_2 variedad vina 
@@ -521,6 +1371,13 @@ mejor puntuados, se pueden encontrar vinos con precio (18) y puntuación
 ##  9 Canadá                          89.4
 ## 10 Chile                           86.5
 ## # ℹ 34 more rows</code></pre>
+=======
+<p>La variable vinos caros no siempre se relaciona con la variable de
+mejor puntuados, se pueden encontrar vinos como por ejemplo “Las Madras”
+un hallazgo entre precio (18) y mejor puntuación (91).</p>
+<p>Francia es el país que tiene la mayor cantidad de vinos mejores
+puntuados del ranking</p>
+>>>>>>> 811a5e6050a7aa0d35f32dcd7e5e1dd38cef193f
 </div>
 
 

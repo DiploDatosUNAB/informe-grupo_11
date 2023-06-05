@@ -1,6 +1,10 @@
 ---
 title: "VINOS"
+<<<<<<< HEAD
 author: "SILVINA PICHETTO - FLORENCIA VUONO"
+=======
+author: "Silvina Pichetto / Florencia Vuono"
+>>>>>>> 811a5e6050a7aa0d35f32dcd7e5e1dd38cef193f
 output: html_document
 ---
 
@@ -12,16 +16,22 @@ library(readr)
 library(datos)
 library(dplyr)
 library(ggplot2)
+library(dplyr)
+
 ```
 
 
 ## Introducción
 
+<<<<<<< HEAD
 El presente informe presenta un ranking de vinos puntuados según la Revista Wine Esthusiast que cuenta con un equipo de revisores de cata más de 24 000 vinos de todo el mundo cada año, desde Francia e Italia hasta California, Australia, Sudáfrica, Argentina y más. Cuenta con acceso gratuito a la base de datos de calificaciones de vinos, cervezas y licores se puede filtrar por puntuación, precio, cosecha, variedad de uva y región, lo que lo convierte en una herramienta fácil y flexible para encontrar su bebida favorita.
+=======
+
 
 ## Exploración de los datos
 
 La base contiene 129.961 vinos puntuados, según país, precio, región, variedad, vina y contiene una pequeña reseña de cada uno.
+<<<<<<< HEAD
 ```{r}
 # Código para cargar o leer los datos
 vinos <- read_csv("datos/vinos.csv")
@@ -36,16 +46,55 @@ El precio promedio es de 35.36
 vinos %>% 
 summarise(mean(precio,na.rm=TRUE))
 
-
 ```
 
-
-Vinos más caros
+Promedio de precios de vinos - (ejercicio que estaba mal)
 
 ```{r}
-filter(vinos,precio >=400)
+vinos %>%
+ group_by(precio) %>%
+ summarise(precio_promedio = mean(precio, na.rm = TRUE))
+```
+Vinos más caros, cuyo valor es superior a 400
+
+```{r}
+filter(vinos, precio >=400)
 
 ```
+
+Vinos baratos, cuyo un valor es inferior a 20
+```{r}
+filter(vinos, precio <=20)
+```
+
+Vinos mejor puntuados, cuya puntuación es superior a 100
+
+```{r}
+filter(vinos, puntos>=100 )
+
+```
+
+Mejores vinos puntuados de Argentina
+
+```{r}
+subset(vinos, pais == "Argentina" & puntos >= 95)
+
+```
+
+Paises con mejor puntuación
+
+```{r}
+aggregate(puntos ~ pais, vinos, max)
+
+```
+
+Variedades mejores puntuadas
+
+```{r}
+aggregate(puntos ~ variedad, vinos, max)
+
+```
+
 
 Vinos Mejor puntuados (>= de 95 puntos) por debajo del promedio de precio, osea 35.
 
@@ -124,6 +173,7 @@ ggplot(vinos_filtrados, aes(x = variedad, y = puntos)) +
 ## Hipótesis
 
 La variedad de malbec de la Provincia de Mendoza está entre las mejores puntuadas de Argentina y del mundo.
+Podemos encontrar 37 vinos malbec con una puntuación de 94.
 
 
 ```{r}
@@ -142,7 +192,7 @@ filter(vinos,precio == 18, puntos>=94)
 
 
 ```
-
+Cual es el país que posee el mejor promedio?
 Inglaterra es el  país que tiene el mejor promedio de vinos puntuados, 91.58, no Francia según mi hipótesis anterior:(
 
 
