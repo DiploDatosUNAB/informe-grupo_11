@@ -1,180 +1,166 @@
 ---
 title: "VINOS"
-<<<<<<< HEAD
-author: "SILVINA PICHETTO - FLORENCIA VUONO"
-=======
 author: "Silvina Pichetto / Florencia Vuono"
->>>>>>> 811a5e6050a7aa0d35f32dcd7e5e1dd38cef193f
 output: html_document
 ---
 
-
 ```{r setup, include=FALSE}
+
 knitr::opts_chunk$set(echo = TRUE)
 # Cargar los paquetes necesarios acá
+
 library(readr)
-library(datos)
 library(dplyr)
 library(ggplot2)
-library(dplyr)
 
 ```
 
-
 ## Introducción
 
-<<<<<<< HEAD
-El presente informe presenta un ranking de vinos puntuados según la Revista Wine Esthusiast que cuenta con un equipo de revisores de cata más de 24 000 vinos de todo el mundo cada año, desde Francia e Italia hasta California, Australia, Sudáfrica, Argentina y más. Cuenta con acceso gratuito a la base de datos de calificaciones de vinos, cervezas y licores se puede filtrar por puntuación, precio, cosecha, variedad de uva y región, lo que lo convierte en una herramienta fácil y flexible para encontrar su bebida favorita.
-=======
-
+# ***El presente informe presenta un ranking de vinos puntuados según la Revista Wine Esthusiast que cuenta con un equipo de revisores de cata más de 24 000 vinos de todo el mundo cada año, desde Francia e Italia hasta California, Australia, Sudáfrica, Argentina y más. Cuenta con acceso gratuito a la base de datos de calificaciones de vinos, cervezas y licores se puede filtrar por puntuación, precio, cosecha, variedad de uva y región, lo que lo convierte en una herramienta fácil y flexible para encontrar su bebida favorita.***
 
 ## Exploración de los datos
 
 La base contiene 129.961 vinos puntuados, según país, precio, región, variedad, vina y contiene una pequeña reseña de cada uno.
-<<<<<<< HEAD
+
 ```{r}
 # Código para cargar o leer los datos
 vinos <- read_csv("datos/vinos.csv")
 ```
 
-Promedio de precios de vinos 
-Cual es el precio promedio de la lista de vinos?
-El precio promedio es de 35.36
-
+Promedio de precios de vinos Cual es el precio promedio de la lista de vinos? El precio promedio es de 35.36
 
 ```{r}
 vinos %>% 
-summarise(mean(precio,na.rm=TRUE))
+  summarise(precio_promedio = mean(precio, na.rm = TRUE))
 
 ```
 
-Promedio de precios de vinos - (ejercicio que estaba mal)
-
-```{r}
-vinos %>%
- group_by(precio) %>%
- summarise(precio_promedio = mean(precio, na.rm = TRUE))
-```
 Vinos más caros, cuyo valor es superior a 400
 
 ```{r}
-filter(vinos, precio >=400)
+vinos_caros <- filter(vinos, precio >= 400)
 
 ```
 
-Vinos baratos, cuyo un valor es inferior a 20
-```{r}
-filter(vinos, precio <=20)
-```
-
-Vinos mejor puntuados, cuya puntuación es superior a 100
+Gráfico de vinos más caros por país.
 
 ```{r}
-filter(vinos, puntos>=100 )
+vinos_caros %>%
+  ggplot(aes(x = pais)) +
+  geom_bar() +
+  labs(title = "Vinos mas caros por pais",
+       x = "Pais",
+       y = "Conteo")
 
 ```
 
-Mejores vinos puntuados de Argentina
+Aquí podemos ver que los vinos más caros provienen, principalmente de Francia.
+
+Ahora vamos a explorar vinos con precios muy baratos.
+
+Vinos baratos, cuyo un valor es inferior \<=4
 
 ```{r}
-subset(vinos, pais == "Argentina" & puntos >= 95)
-
+vinos_baratos <- filter(vinos, precio <= 4)
 ```
 
-Paises con mejor puntuación
+Podemos observar que hay 11 vinos muy baratos menores o iguales a 4.
 
 ```{r}
-aggregate(puntos ~ pais, vinos, max)
-
+vinos_baratos %>%
+  filter(pais %in% c("Espana", "Estados Unidos", "Rumania", "Argentina")) %>%
+  ggplot(aes(x = pais, y = precio)) +
+  geom_bar(stat = "identity") +
+  labs(title = "Vinos baratos por pais",
+       x = "Pais",
+       y = "Precio")
 ```
 
-Variedades mejores puntuadas
+Podemos ver que los vinos baratos provienen principalmente de Estados Unidos.
+
+Vinos mejor puntuados, cuya puntuación es 100
 
 ```{r}
-aggregate(puntos ~ variedad, vinos, max)
+vinos_mejor_puntuados <- filter(vinos, puntos == 100)
+ 
+```
+
+```{r}
+vinos_mejor_puntuados %>%
+  ggplot(aes(x = pais)) +
+  geom_bar() +
+  labs(title = "Vinos mejor puntuados (Puntuacion = 100)",
+       x = "Pais",
+       y = "Conteo")
+```
+
+De qué provincia provienen los mejores vinos puntuados de Argentina ?
+
+```{r}
+mejores_vinos_argentina <- subset(vinos, pais == "Argentina" & puntos >= 95)
 
 ```
 
+```{r}
+ggplot(mejores_vinos_argentina, aes(x = provincia, y = puntos)) +
+  geom_point(color = "red") 
+  
+```
 
-Vinos Mejor puntuados (>= de 95 puntos) por debajo del promedio de precio, osea 35.
+Ahora vamos a ver los vinos mejor puntuados (\>= de 95 puntos) por debajo del promedio de precio, osea 35.
 
 ```{r}
 Vinos_puntos_precio<- filter(vinos,puntos >=95, precio<=35)
 
 ```
 
-Tomando esta última variable que creamos, vamos a agrupar por país y descubrir cuales son los países productores de estos vinos económicos y mejor puntuados. Cual es el mejor país dentro de este Ranking? España con 96.
-
+Tomando esta última variable que creamos, vamos a agrupar por país y descubrir cuales son los países productores de estos vinos económicos y mejor puntuados. Cual es el mejor país dentro de este Ranking?
 
 ```{r}
 Vinos_puntos_precio %>%
   group_by(pais) %>%
   summarise(promedio_puntos = mean(puntos, na.rm = TRUE)) %>% 
-  ggplot(aes(x = pais, y = promedio_puntos)) +
+  ggplot(aes(pais, promedio_puntos)) +
   geom_bar(stat = "identity", fill = "steelblue") +
-  labs(x = "País", y = "Promedio de Puntos") 
+  labs(x = "Pais", y = "Promedio de Puntos") 
  
  
   
 
 ```
 
+El pais con mejores vinos y detro del precio promedio es España con 96.
 
-Ahora vamos a ver cómo viene Argentina en el ranking de precio y calidad...tiene nuestro país vinos que estén económicos por debajo del precio promedio y con buena puntuación? 
-
-Argentina tiene 7 vinos que cumplen con el promedio de precio y con una buena puntuación de 93. No tienen ninguno que cumpla con ambas condiciones de estar igual o por debajo del promedio de 35 y con puntaje de 95.
-
+Ahora vamos a ver cómo viene Argentina en el ranking de precio y calidad...tiene nuestro país vinos que estén económicos por debajo del precio promedio y con buena puntuación?
 
 ```{r}
 Vinos_argentina<- filter(vinos,pais == "Argentina", precio<=35, puntos >= 93 ) 
-ggplot(Vinos_argentina, aes(x = puntos, y = precio)) +
-  geom_point(color = "steelblue") +
-  labs(x = "Puntos", y = "Precio") +
-  ggtitle("Vinos de Argentina con Puntos >= 92 y Precio <= 35")
+
 ```
 
+Argentina tiene 7 vinos que cumplen con el promedio de precio y con una buena puntuación de 93. No tienen ninguno que cumpla con ambas condiciones de estar igual o por debajo del promedio general de 35 y con puntaje de 95.
 
 Cual es el promedio de Precios de los vinos de Argentina?
 
-
 ```{r}
 
 group_by(Vinos_argentina) %>% 
-summarise(mean(precio, na.rm=TRUE))
+summarise(mean(precio, na.rm =TRUE))
 
 ```
 
-
 ```{r}
 group_by(Vinos_argentina) %>% 
-summarise(mean(puntos, na.rm=TRUE))
+summarise(mean(puntos, na.rm =TRUE))
 
 ```
 
 Vemos que Argentina tiene un promedio de 93 puntos y precio por debajo del promedio de vinos, 30. Asi que podemos decir que en Argentina se consiguen vinos muy buen puntuados por debajo del precio promedio de la lista analizada.
 
-
-Ahora vamos a explorar cuales son las variedades mejores puntuadas y económicas
-
-```{r}
-vinos_filtrados <- vinos %>%
-  group_by(variedad) %>%
-  filter(puntos >= 94, precio <= 35)
-
-ggplot(vinos_filtrados, aes(x = variedad, y = puntos)) +
-  geom_bar(stat = "identity", fill = "steelblue") +
-  labs(x = "Variedad", y = "Puntos") +
-  ggtitle("Vinos por Variedad (Puntos >= 94, Precio <= 35)")
-
-
-
-```
-
 ## Hipótesis
 
 La variedad de malbec de la Provincia de Mendoza está entre las mejores puntuadas de Argentina y del mundo.
-Podemos encontrar 37 vinos malbec con una puntuación de 94.
-
 
 ```{r}
 
@@ -182,35 +168,35 @@ subset(vinos, pais == "Argentina" & variedad == "Malbec" & puntos>= 94)
   
 ```
 
+Podemos encontrar 37 vinos malbec con una puntuación de 94.
 
-
-La variable  vinos caros no siempre se relaciona con la variable de mejor puntuados, se pueden encontrar vinos con precio (18) y puntuación (94).
-
+La variable vinos caros no siempre se relaciona con la variable de mejor puntuados, se pueden encontrar vinos con precio barato con buena puntuacion.
 
 ```{r}
-filter(vinos,precio == 18, puntos>=94)
 
+filter(vinos,precio <=18, puntos>=94)
 
 ```
+
+Se puede confirmar que se encuentran vinos baratos, con buena puntuacion.
+
 Cual es el país que posee el mejor promedio?
-Inglaterra es el  país que tiene el mejor promedio de vinos puntuados, 91.58, no Francia según mi hipótesis anterior:(
-
-
 
 ```{r}
 promedio_puntos_pais <- vinos %>%
   group_by(pais) %>%
   summarise(promedio_puntos = mean(puntos, na.rm = TRUE))
 
-ggplot(promedio_puntos_pais, aes(x = pais, y = promedio_puntos)) +
-  geom_bar(stat = "identity", fill = "steelblue") +
-  labs(x = "País", y = "Promedio de Puntos") +
-  ggtitle("Promedio de Puntos por País")
 
 ```
 
+Inglaterra es el país que tiene el mejor promedio de vinos puntuados, 91.58.
 
-
+**Conclusión:**
+Podemos concluir después de haber analizado algunas de las variables,es que el precio promedio de los vinos de la lista es de 35, y el puntaje promedio es de 95.
+Argentina, un país reconocido por la exportación de vinos mendocinos, se encuentra dentro de este ranking con un precio promedio de sus ejemplares de 30 y con puntaje de 94, habiendo 7 vinos dentro de esta categoría.La pronvincia de Mendoza es la principal productora de vinos de Argentina y la variedad de malbec es la más preciada.
+Otra de las cosas que pudimos corroborar es que la variable vinos caros con alto puntaje no siempre se cumple, dentro de la lista hay vinos con un precio de 18 y con un muy buen puntaje de 94.
+Por otro lado, comparamos los países para ver cual tenía mejor promedio de puntos y nos encontramos con la sorpresa de que Inglaterra tiene el mejor promedio de puntos.
 
 
 
