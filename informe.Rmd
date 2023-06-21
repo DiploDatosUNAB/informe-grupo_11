@@ -57,15 +57,53 @@ vinos_caros %>%
 
 Aquí podemos ver que los vinos más caros provienen, principalmente de Francia.
 
-Ahora vamos a explorar vinos con precios muy baratos.
+Ahora vamos a realmente comprobar si los vinos más caros provienen de Francia, o es porque éstos tienen más reviews.
 
-Vinos baratos, cuyo un valor es inferior \<=4
 
 ```{r}
-vinos_baratos <- filter(vinos, precio <= 4)
+
+conteo_resenas <- vinos %>%
+  count(pais)
+
+  
 ```
 
-Podemos observar que hay 11 vinos muy baratos menores o iguales a 4.
+
+
+
+```{r}
+print(conteo_resenas)
+
+
+
+
+```
+
+Podemos ver que hay un sesgo en la base de datos porque hay paises que tienen más reviews que otros. En este caso Francia tiene  22093 reviews de vinos.
+
+
+
+Ahora vamos a explorar vinos con precios muy baratos.
+
+Vinos baratos, cuyo un valor es inferior \<=4. En principio y a simple vista podemos ver que 11 vinos cumplen con la variable, vinos baratos. Pero si normalizamos la cantidad de vinos baratos por la cantidad total de reviews, obtenemos la proporcion de vinos baratos que realmente cumplen con la condición.
+
+```{r}
+# Filtrar vinos baratos
+vinos_baratos <- filter(vinos, precio <= 4)
+
+# Calcular cantidad total de reseñas
+total_resenas <- nrow(vinos)
+
+# Calcular cantidad de reseñas de vinos baratos
+resenas_vinos_baratos <- nrow(vinos_baratos)
+
+# Calcular proporción de reseñas de vinos baratos
+proporcion_vinos_baratos <- resenas_vinos_baratos / total_resenas
+
+# Imprimir la proporción
+print(proporcion_vinos_baratos)
+```
+
 
 ```{r}
 vinos_baratos %>%
@@ -122,8 +160,11 @@ Vinos_puntos_precio %>%
   group_by(pais) %>%
   summarise(promedio_puntos = mean(puntos, na.rm = TRUE)) %>% 
   ggplot(aes(pais, promedio_puntos)) +
-  geom_bar(stat = "identity", fill = "steelblue") +
-  labs(x = "Pais", y = "Promedio de Puntos") 
+  geom_boxplot(fill = "steelblue") +
+  labs(x = "Pais", y = "Promedio de Puntos") +
+  ggtitle("Promedio de Puntos por Pais")
+
+ 
  
  
   
@@ -145,16 +186,13 @@ Cual es el promedio de Precios de los vinos de Argentina?
 
 ```{r}
 
-group_by(Vinos_argentina) %>% 
-summarise(mean(precio, na.rm =TRUE))
+Vinos_argentina %>%
+  group_by(pais) %>%
+  summarise(mean_precio = mean(precio, na.rm = TRUE),
+            mean_puntos = mean(puntos, na.rm = TRUE))
 
 ```
 
-```{r}
-group_by(Vinos_argentina) %>% 
-summarise(mean(puntos, na.rm =TRUE))
-
-```
 
 Vemos que Argentina tiene un promedio de 93 puntos y precio por debajo del promedio de vinos, 30. Asi que podemos decir que en Argentina se consiguen vinos muy buen puntuados por debajo del precio promedio de la lista analizada.
 
